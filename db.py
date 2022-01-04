@@ -55,13 +55,6 @@ def fiyatArttır(yeni_fiyat,urun_no):
     vt.close()
 
 
-def sktUyari():
-    vt = sql.connect('stok.sqlite')
-    im = vt.cursor()
-
-    vt.commit()
-    vt.close()
-    pass
 def urunOlustur(urun_ad,urun_fiyat,urun_stok,skt):
     vt = sql.connect('stok.sqlite')
     im=vt.cursor()
