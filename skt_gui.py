@@ -6,8 +6,8 @@ def skt_gui():
     root = Tk()
     root.title("Son Kullanma Tarihi Kontrol")
     root.geometry("600x300")
-    skt=skt_controller.skt()
-    lbl2 =Label(root,text="Son Kullanma Tarihi gecen urunler")
+    skt = skt_controller.skt()
+    lbl2 = Label(root, text="Son Kullanma Tarihi gecen urunler")
     lbl2.pack()
 
     for i in skt:

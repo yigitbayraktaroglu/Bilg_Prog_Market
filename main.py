@@ -1,3 +1,2 @@
-
-import gui
-gui.gui()
+from gui import *
+gui()

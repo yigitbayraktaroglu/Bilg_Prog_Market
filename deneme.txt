@@ -1,1 +1,3 @@
-[(1003, 'CIKOLATA', 2, 40, '03.05.2022')] [(1002, 'EKMEK', 3, 30, '06.02.2022')]
+Toplam Fiyat:5
+Urun No:1003 Urun Adý: 'CIKOLATA' Fiyat: 2 Son Kullanma Tarihi: '03.05.202
+Urun No:1004 Urun Adý: 'SU' Fiyat: 3 Son Kullanma Tarihi: '21.02.202

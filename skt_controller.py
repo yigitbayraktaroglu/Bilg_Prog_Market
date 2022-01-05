@@ -4,16 +4,18 @@ an = datetime.datetime.now()
 
 
 def uyar(veri):
-    veriler=[]
+    veriler = []
     veriler.append(veri)
+
+
 def skt():
     veriler = []
     vt = sql.connect('stok.sqlite')
     im = vt.cursor()
     im.execute("SELECT * FROM urunler")
     for veri in im:
-        tarih=veri[4]
-        x=tarih.split(".")
+        tarih = veri[4]
+        x = tarih.split(".")
         if int(x[2]) < an.year:
             veriler.append(veri)
         elif int(x[2]) == an.year:
@@ -30,7 +32,6 @@ def skt():
                 pass
         else:
             pass
-    return veriler
     vt.commit()
     vt.close()
-
+    return veriler

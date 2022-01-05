@@ -1,6 +1,8 @@
-
 import sqlite3 as sql
-deneme=[]
+
+import barkod_olustur
+
+liste = []
 
 
 def data(used_codes):
@@ -8,46 +10,54 @@ def data(used_codes):
     im = vt.cursor()
     for i in used_codes:
         im.execute("SELECT * FROM urunler WHERE URUN_NO=?", (i,))
-        deneme.append(im.fetchall())
-        fis(deneme)
+        liste.append(im.fetchall())
+    fis(liste)
+    stokislemi(liste)
     vt.commit()
     vt.close()
 
-def fis(deneme):
-    f=open("deneme.txt","w")
-    str1=' '.join(map(str, deneme))
-    f.write(str1)
+
+def fis(liste):
+    f = open("deneme.txt", "w")
+    f.write("Toplam Fiyat:" + fiyatislemi(liste) + "\n")
+    for i in liste:
+        str1 = str(i)
+        txt = str1.split(",")
+        f.write("Urun No:" + txt[0][2:] + " Urun Adı:" + txt[1] +
+                " Fiyat:" + txt[2] + " Son Kullanma Tarihi:" + txt[4][0:13] + "\n")
     f.close()
 
-def stokislemi():
+
+def stokislemi(liste):
     vt = sql.connect('stok.sqlite')
     im = vt.cursor()
-
-    vt.commit()
-    vt.close()
-    pass
-
-
-def fiyatislemi():
-    vt = sql.connect('stok.sqlite')
-    im = vt.cursor()
-
-    vt.commit()
-    vt.close()
-    pass
-
-
-def stokArttir(yeni_stok,urun_no):
-    vt = sql.connect('stok.sqlite')
-    im = vt.cursor()
-    im.execute("UPDATE urunler SET STOK = ? WHERE URUN_NO=?",(yeni_stok,urun_no))
-
+    for i in liste:
+        str1 = str(i)
+        txt = str1.split(",")
+        im.execute("UPDATE urunler SET STOK=STOK-1 WHERE URUN_NO=?", (txt[0][2:],))
     vt.commit()
     vt.close()
 
 
+def fiyatislemi(liste):
+    ucret = 0
 
-def fiyatArttır(yeni_fiyat,urun_no):
+    for i in liste:
+        str1 = str(i)
+        txt = str1.split(",")
+        ucret = ucret + int(txt[2])
+    return str(ucret)
+
+
+def stokArttir(yeni_stok, urun_no):
+    vt = sql.connect('stok.sqlite')
+    im = vt.cursor()
+    im.execute("UPDATE urunler SET STOK = ? WHERE URUN_NO=?", (yeni_stok, urun_no))
+    vt.commit()
+    vt.close()
+
+
+def fiyatArttir(yeni_fiyat, urun_no):
     vt = sql.connect('stok.sqlite')
     im = vt.cursor()
     im.execute("UPDATE urunler SET FIYAT = ? WHERE URUN_NO=?", (yeni_fiyat, urun_no))
@@ -55,11 +65,12 @@ def fiyatArttır(yeni_fiyat,urun_no):
     vt.close()
 
 
-def urunOlustur(urun_ad,urun_fiyat,urun_stok,skt):
+def urunOlustur(urun_ad, urun_fiyat, urun_stok, skt):
     vt = sql.connect('stok.sqlite')
-    im=vt.cursor()
-    urun_no=urunNoOlustur()
-    im.execute("""INSERT INTO urunler VALUES (?,?,?,?,?)""",(urun_no,urun_ad,urun_fiyat,urun_stok,skt))
+    im = vt.cursor()
+    urun_no = urunNoOlustur()
+    im.execute("""INSERT INTO urunler VALUES (?,?,?,?,?)""", (urun_no, urun_ad, urun_fiyat, urun_stok, skt))
+    barkod_olustur.barkod_olustur(urun_no)
     vt.commit()
     vt.close()
 
@@ -71,7 +82,4 @@ def urunNoOlustur():
     max_id = im.fetchone()[0]
     vt.commit()
     vt.close()
-    return max_id+1
-
-
-
+    return max_id + 1
