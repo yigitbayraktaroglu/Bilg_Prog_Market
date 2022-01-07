@@ -2,12 +2,6 @@ import datetime
 import sqlite3 as sql
 an = datetime.datetime.now()
 
-
-def uyar(veri):
-    veriler = []
-    veriler.append(veri)
-
-
 def skt():
     veriler = []
     vt = sql.connect('stok.sqlite')

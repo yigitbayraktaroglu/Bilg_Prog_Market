@@ -1,4 +1,5 @@
 import sqlite3 as sql
+import barkod_olustur
 
 
 def kullaniciOlustur(user_name, points, sifre):
@@ -6,6 +7,14 @@ def kullaniciOlustur(user_name, points, sifre):
     im = vt.cursor()
     user_id = useridOlustur()
     im.execute("""INSERT INTO  users VALUES (?,?,?,?)""", (user_id, user_name, points, sifre))
+    barkod_olustur.barkod_olustur(user_id)
+    vt.commit()
+    vt.close()
+def kullaniciPuan(id,ucret):
+    vt = sql.connect('kullanici.sqlite')
+    im = vt.cursor()
+    puan=(ucret//100)*5
+    im.execute("UPDATE users SET POINTS=POINTS+? WHERE USER_ID=?", (puan,id))
     vt.commit()
     vt.close()
 

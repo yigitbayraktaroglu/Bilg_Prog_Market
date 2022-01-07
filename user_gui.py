@@ -1,4 +1,4 @@
-import user_db as db
+import user_db
 from tkinter import *
 
 
@@ -6,13 +6,13 @@ def user_gui():
     def olustur():
         user_name = e1.get()
         sifre = e2.get()
-        db.kullaniciOlustur(user_name, 0, sifre)
+        user_db.kullaniciOlustur(user_name, 0, sifre)
         lbl3 = Label(root, text="Kullanici Olusturuldu.")
         lbl3.grid(row=4, column=0)
 
     root = Tk()
     root.title("Kullanici Islemleri")
-    root.geometry("600x300")
+
 
     lbl1 = Label(root, text="Kullanici Adi:")
     lbl1.grid(row=0, column=0)

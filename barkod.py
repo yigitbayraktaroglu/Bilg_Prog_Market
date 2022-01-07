@@ -15,7 +15,6 @@ def bar_reader():
         cv2.imshow('Kapamak icin Q tusuna basiniz.', frame)
         cv2.waitKey(1)
         if cv2.waitKey(1) & 0xFF == ord('q'):
-
             break
         for code in decode(frame):
             if code.data.decode('utf-8') not in used_codes:
@@ -30,3 +29,4 @@ def bar_reader():
                 pass
     cv2.destroyAllWindows()
     db.data(used_codes)
+

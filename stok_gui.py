@@ -1,5 +1,6 @@
 import db
 from tkinter import *
+import stok_controller
 
 
 def stok_gui():
@@ -15,7 +16,6 @@ def stok_gui():
 
         root = Tk()
         root.title("Urun Islemleri")
-        root.geometry("300x140")
 
         lbl1 = Label(root, text="Urun Adi:")
         lbl1.grid(row=0, column=0)
@@ -58,7 +58,7 @@ def stok_gui():
 
         root = Tk()
         root.title("Urun Islemleri")
-        root.geometry("300x140")
+
 
         lbl1 = Label(root, text="Urun No:")
         lbl1.grid(row=0, column=0)
@@ -88,7 +88,7 @@ def stok_gui():
 
         root = Tk()
         root.title("Urun Islemleri")
-        root.geometry("300x140")
+
 
         lbl1 = Label(root, text="Urun No:")
         lbl1.grid(row=0, column=0)
@@ -110,13 +110,15 @@ def stok_gui():
 
     root = Tk()
     root.title("Stok Islemleri")
-    root.geometry("600x300")
+
     btn1 = Button(root, text="Urun olustur.", command=urun_olustur)
     btn1.grid(row=0, column=0)
     btn2 = Button(root, text="Fiyat Guncelle.", command=fiyat_gunc)
     btn2.grid(row=1, column=0)
     btn3 = Button(root, text="Stok Guncelle.", command=stok_gunc)
     btn3.grid(row=2, column=0)
+    btn4 = Button(root, text="Stok Kontrol",command=stok_controller.stokTakip_gui)
+    btn4.grid(row=3,column=0)
     btn = Button(root, text="Kapat", command=root.destroy)
-    btn.grid(row=3, column=0)
+    btn.grid(row=4, column=0)
     root.mainloop()

@@ -1,3 +1,1 @@
-Toplam Fiyat:5
-Urun No:1003 Urun Adý: 'CIKOLATA' Fiyat: 2 Son Kullanma Tarihi: '03.05.202
-Urun No:1004 Urun Adý: 'SU' Fiyat: 3 Son Kullanma Tarihi: '21.02.202
+Toplam Fiyat:0
