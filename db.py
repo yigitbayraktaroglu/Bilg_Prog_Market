@@ -1,6 +1,8 @@
 import sqlite3 as sql
 import barkod_olustur
 import user_db
+import datetime
+an=datetime.datetime.now()
 liste = []
 user = []
 
@@ -11,7 +13,9 @@ def data(used_codes):
     for i in used_codes:
         im.execute("SELECT * FROM urunler WHERE URUN_NO=?", (i,))
         liste.append(im.fetchall())
-
+        if i > 1000:
+            user.append(i)
+            liste.remove(i)
     fis(liste)
     stokislemi(liste)
     vt.commit()
@@ -19,12 +23,9 @@ def data(used_codes):
 
 
 def fis(liste):
-    f = open("deneme.txt", "w")
+    f = open(an+".txt", "w")
     f.write("Toplam Fiyat:" + fiyatislemi(liste) + "\n")
     for i in liste:
-        if i > 1000:
-            user.append(i)
-            liste.remove(i)
         str1 = str(i)
         txt = str1.split(",")
         f.write("Urun No:" + txt[0][2:] + " Urun Adı:" + txt[1] +
