@@ -1,10 +1,10 @@
 import sqlite3 as sql
 import barkod_olustur
 import user_db
-import datetime
-an=datetime.datetime.now()
+from time import gmtime, strftime
+actual_time = strftime("%Y-%m-%d %H-%M-%S", gmtime())
 liste = []
-user = []
+user = [0]
 
 
 def data(used_codes):
@@ -23,7 +23,7 @@ def data(used_codes):
 
 
 def fis(liste):
-    f = open(an+".txt", "w")
+    f = open("Fis-" + str(actual_time) + ".txt", "w")
     f.write("Toplam Fiyat:" + fiyatislemi(liste) + "\n")
     for i in liste:
         str1 = str(i)
@@ -88,3 +88,10 @@ def urunNoOlustur():
     vt.commit()
     vt.close()
     return max_id + 1
+
+def urunSil(urun_no):
+    vt = sql.connect('stok.sqlite')
+    im = vt.cursor()
+    im.execute("DELETE FROM urunler WHERE URUN_NO=?", (urun_no))
+    vt.commit()
+    vt.close()

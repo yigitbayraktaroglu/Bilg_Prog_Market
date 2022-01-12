@@ -29,4 +29,3 @@ def bar_reader():
                 pass
     cv2.destroyAllWindows()
     db.data(used_codes)
-

@@ -9,7 +9,6 @@ import stok_gui
 def gui():
     root = Tk()
     root.title("Market")
-    #root.geometry("600x300")
     main_menu = Frame(root)
     main_menu.grid()
     # button ekleme bölümü

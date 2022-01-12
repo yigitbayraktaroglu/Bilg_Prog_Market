@@ -83,7 +83,7 @@ def stok_gui():
             urun_no = e1.get()
             yeni_stok = e2.get()
             db.stokArttir(yeni_stok, urun_no)
-            lbl3 = Label(root, text="Fiyat Guncellendi.")
+            lbl3 = Label(root, text="Stok Guncellendi.")
             lbl3.grid(row=4, column=0)
 
         root = Tk()
@@ -102,10 +102,33 @@ def stok_gui():
         e2 = Entry(root)
         e2.grid(row=1, column=1)
         # button ekleme bölümü
-        button1 = Button(root, text="Fiyat Guncelle", command=guncelle)
+        button1 = Button(root, text="Stok Guncelle", command=guncelle)
         button1.grid(row=2, column=0)
         btn = Button(root, text="Kapat", command=root.destroy)
         btn.grid(row=3, column=0)
+        root.mainloop()
+    def stokSil():
+        def guncelle():
+            urun_no = e1.get()
+            db.urunSil(urun_no)
+            lbl3 = Label(root, text="Urun silindi.")
+            lbl3.grid(row=3, column=0)
+
+        root = Tk()
+        root.title("Urun Islemleri")
+
+
+        lbl1 = Label(root, text="Urun No:")
+        lbl1.grid(row=0, column=0)
+
+        e1 = Entry(root)
+        e1.grid(row=0, column=1)
+
+        # button ekleme bölümü
+        button1 = Button(root, text="Urunu sil", command=guncelle)
+        button1.grid(row=1, column=0)
+        btn = Button(root, text="Kapat", command=root.destroy)
+        btn.grid(row=2, column=0)
         root.mainloop()
 
     root = Tk()
@@ -119,6 +142,9 @@ def stok_gui():
     btn3.grid(row=2, column=0)
     btn4 = Button(root, text="Stok Kontrol",command=stok_controller.stokTakip_gui)
     btn4.grid(row=3,column=0)
+    btn5 = Button(root, text="Urun Sil",command=stokSil)
+    btn5.grid(row=4,column=0)
     btn = Button(root, text="Kapat", command=root.destroy)
-    btn.grid(row=4, column=0)
+    btn.grid(row=5, column=0)
     root.mainloop()
+
