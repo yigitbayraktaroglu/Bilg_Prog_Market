@@ -14,8 +14,8 @@ def kullaniciOlustur(user_name, points, sifre):
 def kullaniciPuan(id,ucret):
     vt = sql.connect('kullanici.sqlite')
     im = vt.cursor()
-    puan=(ucret//100)*5
-    im.execute("UPDATE users SET POINTS=POINTS+? WHERE USER_ID=?", (puan, id))
+    puan=int((ucret//100)*5)
+    im.execute('UPDATE users SET POINTS=? WHERE USER_ID=?', (puan, id))
     vt.commit()
     vt.close()
 

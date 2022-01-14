@@ -11,11 +11,11 @@ def data(used_codes):
     vt = sql.connect('stok.sqlite')
     im = vt.cursor()
     for i in used_codes:
-        im.execute("SELECT * FROM urunler WHERE URUN_NO=?", (i,))
-        liste.append(im.fetchall())
-        if i > 1000:
+        if int(i) > 10000:
             user.append(i)
-            liste.remove(i)
+        else:
+            im.execute("SELECT * FROM urunler WHERE URUN_NO=?", (i,))
+            liste.append(im.fetchall())
     fis(liste)
     stokislemi(liste)
     vt.commit()
@@ -28,7 +28,7 @@ def fis(liste):
     for i in liste:
         str1 = str(i)
         txt = str1.split(",")
-        f.write("Urun No:" + txt[0][2:] + " Urun Adı:" + txt[1] +
+        f.write("Urun No:" + txt[0][2:] + " Urun Adi:" + txt[1] +
                 " Fiyat:" + txt[2] + " Son Kullanma Tarihi:" + txt[4][0:13] + "\n")
     f.close()
 
